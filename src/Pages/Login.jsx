@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 export const Login = () => {
@@ -8,8 +8,14 @@ export const Login = () => {
   })
   const [loding, setLoading] = useState(false)
   const [error, setError] = useState("");
-
   const navgation = useNavigate()
+  const user = JSON.parse(localStorage.getItem('user'))
+
+  useEffect(()=> {
+    if(user && user !== null){
+        navgation('/')
+    }
+  },[])
 
   const handleLogin = async (e) => {
     setLoading(true)
